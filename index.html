@@ -1327,8 +1327,7 @@
     <!-- 하단 제어 영역 -->
     <div id="common-controls" class="bottom-controls" style="display: none;">
         <div class="keyword-form">
-            <input type="text" id="keyword-input" class="keyword-input" placeholder="키워드를 입력하세요">
-            <button class="keyword-submit" onclick="handleKeywordSubmit()">이동</button>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="keyword-input" class="keyword-input" placeholder="키워드를 입력하세요">            <button class="keyword-submit" onclick="handleKeywordSubmit()">이동</button>
         </div>
         <div class="history-section">
             <div>확인한 페이지 리스트:</div>
@@ -1506,7 +1505,7 @@
         // 스크롤 이벤트 등록
         window.addEventListener('scroll', scrollCheckHandler);
     }
-    
+
     // 전송 제출 핸들러
     function handleKeywordSubmit() {
         const input = document.getElementById('keyword-input');
