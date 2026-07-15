@@ -60,7 +60,7 @@
         align-items: center;
         position: relative;
         min-height: 100vh;
-        padding-top: 190px; /* 상단 고정 GM 패널의 공간 확보 */
+        padding-top: 260px; /* 상단 고정 GM 패널의 공간 확보 */
     }
 
     /* GM용 상단 고정식 조작 패널 스타일 */
@@ -90,7 +90,7 @@
         flex-wrap: wrap;
         gap: 4px;
         justify-content: center;
-        max-height: 110px; 
+        max-height: 200px; 
         overflow-y: auto; 
     }
     .btn-gm {
@@ -109,6 +109,34 @@
         color: #ff9500;
         font-weight: bold;
     }
+
+    /* [추가] 마스터 컨트롤러 헤더 스타일 (타이틀과 토글 버튼 가로 배치) */
+    .gm-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+    /* [추가] 접기/펴기 버튼 디자인 */
+    .btn-gm-toggle {
+        background-color: #ff9500;
+        color: #1c1c1e;
+        border: none;
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .btn-gm-toggle:active {
+        background-color: #e08500;
+    }
+    /* [추가] 패널이 접혔을 때 버튼 컨테이너를 숨기는 클래스 */
+    .gm-btn-container.collapsed {
+        display: none !important;
+    }
+
 
     /* 중앙 흰색 카드 영역 */
     .container {
@@ -373,8 +401,11 @@
 
 <!-- GM 전용 상단 고정 조작 패널 -->
 <div class="gm-fixed-panel">
-    <div class="gm-panel-title">🧙‍♂️ GM 마스터 컨트롤러</div>
-    <div class="gm-btn-container">
+    <div class="gm-panel-header">
+        <div class="gm-panel-title" style="margin-bottom: 0;">🧙‍♂️ GM 마스터 컨트롤러</div>
+        <button id="gm-toggle-btn" class="btn-gm-toggle" onclick="toggleGMPanel()">▲ 접기</button>
+    </div>
+    <div id="gm-btn-container" class="gm-btn-container">
         <button class="btn-gm" onclick="navigateTo('page1')">주의사항</button>
         <button class="btn-gm" onclick="navigateTo('page2')">줄거리</button>
         <button class="btn-gm" onclick="navigateTo('page3')">남작령</button>
@@ -1704,6 +1735,25 @@
 
         window.scrollTo(0, 0);
     }
+
+    // [추가] 마스터 컨트롤러 패널 접기/펴기 토글 함수
+    function toggleGMPanel() {
+        const container = document.getElementById('gm-btn-container');
+        const btn = document.getElementById('gm-toggle-btn');
+        
+        if (container.classList.contains('collapsed')) {
+            // 펼치기 상태로 전환
+            container.classList.remove('collapsed');
+            btn.textContent = '▲ 접기';
+            document.body.style.paddingTop = '230px'; // 패널이 열렸을 때의 기존 상단 여백 보존
+        } else {
+            // 접기 상태로 전환
+            container.classList.add('collapsed');
+            btn.textContent = '▼ 펴기';
+            document.body.style.paddingTop = '60px';  // 패널이 닫혔을 때 본문 카드를 위로 바짝 붙임
+        }
+    }
+
 
     // 스크롤 끝 감지 로직 함수
     function setupScrollEndDetection(pageId) {
