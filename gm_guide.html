@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>희미해져가는 향기에 침식되어 (GM용)</title>
     <style>
-    /* 1. 웹폰트 정의 */
+    /* 웹폰트 정의 */
     @font-face {
         font-family: 'AstaSans';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/AstaSans-Light.woff2') format('woff2');
@@ -110,14 +110,14 @@
         font-weight: bold;
     }
 
-    /* [추가] 마스터 컨트롤러 헤더 스타일 (타이틀과 토글 버튼 가로 배치) */
+    /*  마스터 컨트롤러 헤더 스타일 (타이틀과 토글 버튼 가로 배치) */
     .gm-panel-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 6px;
     }
-    /* [추가] 접기/펴기 버튼 디자인 */
+    /*  접기/펴기 버튼 디자인 */
     .btn-gm-toggle {
         background-color: #ff9500;
         color: #1c1c1e;
@@ -132,7 +132,7 @@
     .btn-gm-toggle:active {
         background-color: #e08500;
     }
-    /* [추가] 패널이 접혔을 때 버튼 컨테이너를 숨기는 클래스 */
+    /*  패널이 접혔을 때 버튼 컨테이너를 숨기는 클래스 */
     .gm-btn-container.collapsed {
         display: none !important;
     }
@@ -1690,7 +1690,7 @@
             scrollCheckHandler = null;
         }
 
-        // 1. 페이지별 블러 처리 배경 변경 매핑 구현
+        // 페이지별 블러 처리 배경 변경 매핑 구현
         if (pageId === 'page2') {
             document.body.className = 'bg-page2';
         } else if (pageId === 'page3') {
@@ -1710,27 +1710,27 @@
             document.body.className = ''; 
         }
 
-        // 2. 모든 페이지를 강제로 보이지 않도록 정리
+        //  모든 페이지를 강제로 보이지 않도록 정리
         document.querySelectorAll('.page').forEach(p => {
             p.classList.remove('active');
         });
         
-        // 3. 목적지 페이지만 콕 찝어 액티브 클래스 부여
+        //  목적지 페이지만 콕 찝어 액티브 클래스 부여
         const targetPage = document.getElementById(pageId);
         if (targetPage) {
             targetPage.classList.add('active');
         }
 
-        // 4. GM용은 언제나 하단 제어 패널 전체 활성화 유지
+        //  GM용은 언제나 하단 제어 패널 전체 활성화 유지
         const commonControls = document.getElementById('common-controls');
         commonControls.style.display = 'block';
 
-        // 5. 방문 보존 기록 갱신
+        //  방문 보존 기록 갱신
         visitedPages.add(pageId);
         localStorage.setItem('qr_game_history_gm', JSON.stringify(Array.from(visitedPages)));
         updateHistoryUI();
 
-        // 6. 브라우저 뒤로가기 히스토리 동기화 연동 (뒤로가기 진행 중이 아닐 때만)
+        // 브라우저 뒤로가기 히스토리 동기화 연동 (뒤로가기 진행 중이 아닐 때만)
         if (!isBackState) {
             history.pushState({ pageId: pageId }, null, '#' + pageId);
         }
@@ -1738,7 +1738,7 @@
         window.scrollTo(0, 0);
     }
 
-    // [추가] 마스터 컨트롤러 패널 접기/펴기 토글 함수
+    // 마스터 컨트롤러 패널 접기/펴기 토글 함수
     function toggleGMPanel() {
         const container = document.getElementById('gm-btn-container');
         const btn = document.getElementById('gm-toggle-btn');
